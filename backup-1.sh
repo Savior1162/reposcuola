@@ -11,7 +11,7 @@ NOME_FILE="backup_${DATA}.tar.gz"
 
 
 LOG_DIR="/home/lorenzo/LABS/logs"
-LOG_FILE="$LOG_DIR/backup_$(date +%Y%m%d).log"
+LOG_FILE="$LOG_DIR/$(date +%Y%m%d)_backup.log"
 GIORNI_RETENTION_LOG=30
 
 scrivi_log() {
@@ -67,7 +67,9 @@ DIR_PADRE=$(dirname "$ORIGINE")
 NOME_DIR=$(basename "$ORIGINE")
 
 if tar -czf "$CARTELLA_TEMP/$NOME_FILE" -C "$DIR_PADRE" "$NOME_DIR" 2>> "$LOG_FILE"; then
-    scrivi_log "SUCCESSO: Archivio creato in staging."
+    DIMENSIONE=$(du -h "$CARTELLA_TEMP/$NOME_FILE" | awk '{print $1}')
+    scrivi_log "SUCCESSO: Archivio creato in staging (Dimensione: $DIMENSIONE)."
+    
 
     scrivi_log "Verifica integrità del file tar.gz..."
 
