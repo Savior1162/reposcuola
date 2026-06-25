@@ -2,15 +2,15 @@
 set -e
 
 
-ORIGINE="/home/lorenzo/source"
-DESTINAZIONE="/home/lorenzo/DESTINAZIONE"
-CARTELLA_TEMP="/home/lorenzo/staging"
+ORIGINE="/home/lorenzo/LABS/source"
+DESTINAZIONE="/home/lorenzo/LABS/DESTINAZIONE"
+CARTELLA_TEMP="/home/lorenzo/LABS/staging"
 
 DATA=$(date +%Y%m%d_%H%M%S)
 NOME_FILE="backup_${DATA}.tar.gz"
 
 
-LOG_DIR="$DESTINAZIONE/logs"
+LOG_DIR="/home/lorenzo/LABS/logs"
 LOG_FILE="$LOG_DIR/backup_$(date +%Y%m%d).log"
 GIORNI_RETENTION_LOG=30
 
