@@ -9,7 +9,7 @@ CARTELLA_TEMP="/home/lorenzo/staging"
 DATA=$(date +%Y%m%d_%H%M%S)
 NOME_FILE="backup_${DATA}.tar.gz"
 
-# --- Rotazione log: un file di log per giorno, in una sottocartella dedicata ---
+
 LOG_DIR="$DESTINAZIONE/logs"
 LOG_FILE="$LOG_DIR/backup_$(date +%Y%m%d).log"
 GIORNI_RETENTION_LOG=30
@@ -18,7 +18,7 @@ scrivi_log() {
     printf "%s - %s\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$1" >> "$LOG_FILE"
 }
 
-# --- Pulizia file temporanei orfani in caso di interruzione (CTRL+C, kill, crash) ---
+
 pulisci_temp() {
     if [ -f "$CARTELLA_TEMP/$NOME_FILE" ]; then
         rm -f "$CARTELLA_TEMP/$NOME_FILE"
@@ -46,7 +46,7 @@ fi
 
 scrivi_log "INIZIO PROCESSO AVANZATO"
 
-# --- Rotazione log: elimina i file di log più vecchi di N giorni ---
+
 find "$LOG_DIR" -name "backup_*.log" -type f -mtime +"$GIORNI_RETENTION_LOG" -delete 2>> "$LOG_FILE"
 scrivi_log "Rotazione log: rimossi i log più vecchi di $GIORNI_RETENTION_LOG giorni."
 
